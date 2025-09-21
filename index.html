@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wedding-card-viewport">
+
+    <!-- Background florals -->
+    <div class="floral top-left">🌸</div>
+    <div class="floral top-right">🌸</div>
+    <div class="floral bottom-left">🌸</div>
+    <div class="floral bottom-right">🌸</div>
+
+    <!-- Hidden audio -->
+    <audio id="bg-audio" src="Song.mp3" loop></audio>
+
+    <!-- Closed Card -->
+    <div id="closed-card-wrapper" class="closed-card-wrapper">
+      <div class="closed-card" role="button" aria-label="Closed invitation">
+        <div class="closed-front">
+          <div class="closed-content">
+            <p class="closed-title">Wedding Invitation</p>
+            <p class="closed-sub">Tap the heart to open</p>
+          </div>
+        </div>
+
+        <!-- Ribbon appears dynamically -->
+        <div id="ribbon" class="ribbon-anim" style="display:none;"></div>
+
+        <!-- Heart button -->
+        <button id="open-btn" class="heart-button" aria-label="Open invitation">❤️</button>
+      </div>
+    </div>
+
+    <!-- Open Card -->
+    <div id="open-card-wrapper" class="open-card-wrapper" style="display:none;">
+      <div class="wedding-card">
+        <div class="card-top-controls">
+          <button id="audio-btn" class="audio-btn" aria-label="Toggle audio">🔈</button>
+        </div>
+
+        <h5 class="quran">
+          وَخَلَقْنَاكُمْ أَزْوَاجًا <br />
+          <small class="text-muted">And We created you in pairs (Quran 78:8)</small>
+        </h5>
+
+        <p class="invite-text">
+          MR. & MRS. <span class="highlight">Bashair Ahmad</span> <br />
+          CORDIALLY INVITE YOU TO THE WEDDING CEREMONY OF THEIR BELOVED SON
+        </p>
+
+        <h1 class="groom-name">Naveed Ahmad</h1>
+
+        <div class="image-space">
+          <img src="wedding.jpeg" alt="Couple" class="couple-img"/>
+        </div>
+
+        <p class="program-title">PROGRAMME IN-SHA-ALLAH</p>
+        <p class="date-time">
+          <span class="day">SATURDAY & SUNDAY</span><br />
+          <span class="date">18 & 19</span><br />
+          <span class="month">OCTOBER</span><br />
+          <span class="year">2025</span><br />
+          <span class="time">AT 1:00 PM</span>
+        </p>
+        <p class="venue">VENUE: JHANGEER MARQUEE , MULTAN ROAD, DUNYAPUR</p>
+        <p class="contact">CONTACT: 0300-7320445 | 0302-7393099</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
