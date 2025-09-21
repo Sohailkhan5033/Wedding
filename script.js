@@ -38,3 +38,21 @@ audioBtn.addEventListener("click", () => {
     audioBtn.textContent = "🔈";
   }
 });
+// 🎉 Confetti when card opens
+function launchConfetti() {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 5000);
+  }
+  
+  // trigger confetti when card opens
+  openBtn.addEventListener("click", () => {
+    for (let i = 0; i < 30; i++) {
+      setTimeout(launchConfetti, i * 150);
+    }
+  });
+  document.querySelector('.wedding-card-viewport::before').style.opacity = 1;
+  

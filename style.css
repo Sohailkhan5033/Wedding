@@ -14,7 +14,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden; /* prevent side-scroll */
+    overflow-y: auto;   /* allow vertical scrolling */
   }
   
   /* viewport: full-screen centered */
@@ -52,6 +53,7 @@
     justify-content: center;
     z-index: 2;
   }
+
   .closed-card {
     width: 360px;
     max-width: 92%;
@@ -64,15 +66,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column; /* stack content + button */
   }
-  .closed-content { text-align:center; pointer-events:none; }
-  .closed-title { font-size: 18px; font-weight:700; color:var(--gold); margin:0; }
-  .closed-sub { margin-top:6px; font-size:13px; color:#6b6b6b; }
   
-  /* heart button */
+  .closed-content {
+    text-align: center;
+    margin-bottom: 100px; /* increased from 60px to push text above heart */
+  }
+  
   .heart-button {
     position: absolute;
-    top: 50%;
+    top: 70%; /* moved further down */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 92px;
@@ -91,6 +95,18 @@
     transition: transform .18s ease, box-shadow .18s ease;
     animation: pulse 1.5s infinite;
   }
+  
+  .heart-button:hover {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+  
+  
+  
+  .closed-title { font-size: 18px; font-weight:700; color:var(--gold); margin:0; }
+  .closed-sub { margin-top:6px; font-size:13px; color:#6b6b6b; }
+  
+  /* heart button */
+ 
   .heart-button:hover { transform: translate(-50%, -50%) scale(1.06); }
   
   /* pulse animation */
@@ -134,6 +150,8 @@
     transform-origin: top center;
     animation: openCard 700ms cubic-bezier(.2,.9,.25,1) both;
     position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
   @keyframes openCard {
     0% { transform: perspective(900px) rotateX(65deg) scale(.88); opacity: 0; }
@@ -159,24 +177,26 @@
   .program-title { margin-top: 10px; font-weight:700; color:#b84; text-align:center; }
   .date-time, .venue, .contact { text-align:center; color:#444; }
   .venue { font-weight:700; color:#886; }
+  
+  /* wrappers */
   html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;   /* let body grow with content */
-    overflow-x: hidden; /* prevent side-scroll */
-    overflow-y: auto;   /* enable vertical scroll */
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   #closed-card-wrapper,
   #open-card-wrapper {
     display: none;
-    flex-direction: column;  /* stack things vertically */
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* start at top, scroll down */
+    justify-content: flex-start;
     width: 100%;
-    min-height: 100vh;   /* at least one screen */
-    padding: 1rem;       /* breathing space */
+    min-height: 100vh;
+    padding: 1rem;
     box-sizing: border-box;
   }
   
@@ -184,3 +204,56 @@
     display: flex; /* show initially */
   }
   
+  /* 📱 Mobile fix: keep golden border visible */
+  @media (max-width: 480px) {
+    .wedding-card {
+      margin: 0 12px; /* spacing so borders don’t stick to screen edges */
+    }
+  }
+  .confetti {
+    position: fixed;
+    top: -10px;
+    width: 8px;
+    height: 12px;
+    background: gold;
+    opacity: 0.8;
+    transform: rotate(15deg);
+    animation: fall linear forwards;
+    z-index: 9999;
+  }
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+    
+  @keyframes shimmer {
+    0% { box-shadow: 0 0 8px rgba(212,175,55,0.6); }
+    50% { box-shadow: 0 0 20px rgba(212,175,55,0.9); }
+    100% { box-shadow: 0 0 8px rgba(212,175,55,0.6); }
+  }
+  
+  .wedding-card {
+    animation: openCard 700ms cubic-bezier(.2,.9,.25,1) both, shimmer 2s infinite alternate;
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeUp 0.6s forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .wedding-card-viewport::before {
+    content: '';
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: radial-gradient(circle, rgba(255,250,240,0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+    z-index:1;
+  }
+      
