@@ -159,4 +159,28 @@
   .program-title { margin-top: 10px; font-weight:700; color:#b84; text-align:center; }
   .date-time, .venue, .contact { text-align:center; color:#444; }
   .venue { font-weight:700; color:#886; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;   /* let body grow with content */
+    overflow-x: hidden; /* prevent side-scroll */
+    overflow-y: auto;   /* enable vertical scroll */
+  }
+  
+  #closed-card-wrapper,
+  #open-card-wrapper {
+    display: none;
+    flex-direction: column;  /* stack things vertically */
+    align-items: center;
+    justify-content: flex-start; /* start at top, scroll down */
+    width: 100%;
+    min-height: 100vh;   /* at least one screen */
+    padding: 1rem;       /* breathing space */
+    box-sizing: border-box;
+  }
+  
+  #closed-card-wrapper {
+    display: flex; /* show initially */
+  }
   
